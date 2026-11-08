@@ -396,6 +396,18 @@ details.more summary{cursor:pointer;color:var(--crust-dark);font-size:13px;margi
 .web-strip span{flex:1}
 .web-strip b{color:var(--ink)}
 
+.ways{margin-bottom:18px}
+.ways h2{font-family:var(--serif);font-size:18px;margin:0 0 10px;color:var(--ink)}
+.ways-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.way{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.way.rec{border:2px solid var(--crust)}
+.way h3{margin:0;font-family:var(--serif);font-size:18px}
+.way p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5;flex:1}
+.way p b{color:var(--ink)}
+.way .btn{align-self:flex-start;margin-top:6px}
+.way-tag{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--muted)}
+.way.rec .way-tag{color:var(--crust-dark)}
+
 </style>
 </head>
 <body>
@@ -86652,7 +86664,7 @@ function saveReview({ note, book, doc, xls, proj }) {
 
 /* ===== Easy Qual Oven ===== */
 'use strict';
-const APP_VERSION = '0.5.0';
+const APP_VERSION = '0.5.1';
 const BUILD_DATE = '2026-11-08';
 const FORMAT_VERSION = 1;
 const FILE_EXT = '.qualoven';
@@ -86916,7 +86928,10 @@ async function showWelcome() {
     <div class="welcome-hero">${LOGO}<div><h1>Easy Qual Oven</h1><div class="tagline">Where coding isn't half-baked.</div><p>Easy Qual Oven is a simple qualitative coding tool for interview research. Import your transcripts, build a codebook, and see every excerpt for a code in one place.</p></div></div>
     ${rec && rec.project ? `<div class="resume"><div style="font-size:26px">🍞</div><div class="rt"><b>Continue “${esc(rec.project.name)}”</b><div>Last edited ${esc(ago(rec.project.modified))} · ${plural(rec.project.documents.length, 'transcript')}, ${plural(rec.project.codes.length, 'code')}${rec.savedToFile ? '' : ' · <b>has changes not yet saved to a file</b>'}</div></div><button class="btn primary" id="w-resume">Continue</button></div>` : ''}
     ${IS_LOCAL ? `<div class="where-note local"><span class="where-dot"></span><div><b>You're using the copy on your computer</b> (version ${APP_VERSION}). It works without the internet. <a href="${SITE_URL}" target="_blank" rel="noopener">Check for a newer version</a></div></div>`
-      : `<div class="where-note web"><div class="wn-text"><b>⚠ You're using the web version.</b> Work you haven't saved to a project file is kept only in this browser and can be lost if you clear your browsing history. For real research data, download the app: it runs on your own computer and works without the internet.</div><button class="btn primary" id="w-getapp">⤓ Download the app <span class="vtag">v${APP_VERSION}</span></button></div>`}
+      : `<div class="ways"><h2>Two ways to use Easy Qual Oven</h2><div class="ways-row">
+          <div class="way rec"><div class="way-tag">Recommended for research data</div><h3>⤓ Download the app</h3><p>Keep Easy Qual Oven as a file on your computer and open it any time, even without the internet. Your project files stay in folders you control.</p><button class="btn primary" id="w-getapp">Download the app <span class="vtag">v${APP_VERSION}</span></button></div>
+          <div class="way"><div class="way-tag">Good for trying it out</div><h3>🌐 Work online</h3><p>Start right here with one of the options below. Your transcripts stay on your computer, but <b>work you haven't saved to a project file is kept only in this browser</b> and can be lost if you clear your browsing history. Click Save often.</p></div>
+        </div></div>`}
     <div class="cards">
       <button class="card" id="w-new"><span class="ci">${ICON_BAKE}</span><h3>New project</h3><p>Start fresh with your own interview transcripts.</p></button>
       <button class="card" id="w-open"><span class="ci">${ICON_OVEN}</span><h3>Open project</h3><p>Pick up a project you saved earlier (a ${FILE_EXT} file).</p></button>
